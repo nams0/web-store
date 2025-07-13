@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
-import { ImSearch } from "react-icons/im"
-import { FaListUl } from "react-icons/fa"
-
 import Card from "../components/Card"
 import Loader from "../components/Loader"
 import { useProducts } from "../context/ProductProvider"
 import {
   categoriseProducts,
-  createQueryObject,
   getInitialQuery,
   searchProducts,
 } from "../helpers/helper"
 
 import styles from "./Products.module.css"
+import SearchBox from "../components/SearchBox"
+import Sidebar from "../components/Sidebar"
 
 function Products() {
   const [search, setSearch] = useState("")
@@ -40,29 +38,9 @@ function Products() {
     setDisplayed(categorisedProducts)
   }, [query])
 
-  const searchHandler = () => {
-    setQuery((query) => createQueryObject(query, { search }))
-  }
-
-  const categoryHandler = ({ tagName, innerText }) => {
-    if (tagName !== "LI") return
-    const category = innerText.toLowerCase()
-    setQuery((query) => createQueryObject(query, { category }))
-  }
-
   return (
     <>
-      <div>
-        <input
-          type="text"
-          placeholder="Search..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value.trim().toLowerCase())}
-        />
-        <button onClick={searchHandler}>
-          <ImSearch />
-        </button>
-      </div>
+      <SearchBox search={search} setSearch={setSearch} setQuery={setQuery} />
 
       <div className={styles.container}>
         <div className={styles.products}>
@@ -71,19 +49,7 @@ function Products() {
             <Card key={product.id} data={product} />
           ))}
         </div>
-        <div>
-          <div>
-            <FaListUl />
-            <p>Categories</p>
-          </div>
-          <ul onClick={(e) => categoryHandler(e.target)}>
-            <li>All</li>
-            <li>Electronics</li>
-            <li>Jewelery</li>
-            <li>Men's Clothing</li>
-            <li>Women's Clothing</li>
-          </ul>
-        </div>
+        <Sidebar setQuery={setQuery} />
       </div>
     </>
   )
