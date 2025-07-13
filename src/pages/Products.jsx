@@ -10,6 +10,7 @@ import { useProducts } from "../context/ProductProvider"
 import {
   categoriseProducts,
   createQueryObject,
+  getInitialQuery,
   searchProducts,
 } from "../helpers/helper"
 
@@ -25,10 +26,12 @@ function Products() {
 
   useEffect(() => {
     setDisplayed(products)
+    setQuery(getInitialQuery(searchParams))
   }, [products])
 
   useEffect(() => {
     setSearchParams(query)
+    setSearch(query.search || "")
     const searchedProducts = searchProducts(products, query.search)
     const categorisedProducts = categoriseProducts(
       searchedProducts,
