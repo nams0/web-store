@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useSearchParams } from "react-router-dom"
 
 import { ImSearch } from "react-icons/im"
 import { FaListUl } from "react-icons/fa"
@@ -6,7 +7,11 @@ import { FaListUl } from "react-icons/fa"
 import Card from "../components/Card"
 import Loader from "../components/Loader"
 import { useProducts } from "../context/ProductProvider"
-import { categoriseProducts, searchProducts } from "../helpers/helper"
+import {
+  categoriseProducts,
+  createQueryObject,
+  searchProducts,
+} from "../helpers/helper"
 
 import styles from "./Products.module.css"
 
@@ -14,6 +19,7 @@ function Products() {
   const [search, setSearch] = useState("")
   const [query, setQuery] = useState({})
   const [displayed, setDisplayed] = useState([])
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const products = useProducts() //this is state from ProductProvider and on change ProductProvider will rerender then children components will rerender too
 
@@ -22,6 +28,7 @@ function Products() {
   }, [products])
 
   useEffect(() => {
+    setSearchParams(query)
     const searchedProducts = searchProducts(products, query.search)
     const categorisedProducts = categoriseProducts(
       searchedProducts,
@@ -31,13 +38,13 @@ function Products() {
   }, [query])
 
   const searchHandler = () => {
-    setQuery((query) => ({ ...query, search }))
+    setQuery((query) => createQueryObject(query, { search }))
   }
 
   const categoryHandler = ({ tagName, innerText }) => {
     if (tagName !== "LI") return
     const category = innerText.toLowerCase()
-    setQuery((query) => ({ ...query, category }))
+    setQuery((query) => createQueryObject(query, { category }))
   }
 
   return (
@@ -70,8 +77,8 @@ function Products() {
             <li>All</li>
             <li>Electronics</li>
             <li>Jewelery</li>
-            <li>Mens's Clothing</li>
-            <li>Womens's Clothing</li>
+            <li>Men's Clothing</li>
+            <li>Women's Clothing</li>
           </ul>
         </div>
       </div>

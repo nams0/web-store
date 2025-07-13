@@ -9,11 +9,25 @@ const searchProducts = (products, search) => {
 }
 
 const categoriseProducts = (searchedProducts, category) => {
-  if (!category || category === "all") return searchedProducts
+  if (!category) return searchedProducts
   const categorisedProducts = searchedProducts.filter(
     (searchedProduct) => searchedProduct.category === category
   )
   return categorisedProducts
 }
 
-export { shortenText, searchProducts, categoriseProducts }
+const createQueryObject = (currentQuery, newQuery) => {
+  if (newQuery.category === "all") {
+    const { category, ...rest } = currentQuery
+    return rest
+  }
+
+  if (newQuery.search === "") {
+    const { search, ...rest } = currentQuery
+    return rest
+  }
+
+  return { ...currentQuery, ...newQuery }
+}
+
+export { shortenText, searchProducts, categoriseProducts, createQueryObject }
