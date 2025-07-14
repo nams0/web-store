@@ -1,5 +1,7 @@
 import { createContext, useContext, useReducer } from "react"
 
+import { sumProducts } from "../helpers/helper"
+
 const initialState = {
   selectedItems: [],
   itemsCouter: 0,
@@ -12,15 +14,48 @@ const reducer = (state, action) => {
     case "ADD_ITEM":
       if (!state.selectedItems.find((item) => item.id === action.payload.id))
         state.selectedItems.push({ ...action.payload, quantity: 1 })
-      else
-        state.selectedItems.map((item) => {
-          if (item.id === action.payload.id) item.quantity += 1
-        })
       return {
-        selectedItems: [...state.selectedItems],
-        itemsCouter: state.itemsCouter + 1,
-        totalPrice: state.totalPrice + action.payload.price,
+        ...state,
+        ...sumProducts(state.selectedItems),
         checkout: false,
+      }
+
+    case "REMOVE_ITEM":
+      const newSelectedItems = state.selectedItems.filter(
+        (item) => item.id !== action.payload.id
+      )
+      return {
+        selectedItems: [...newSelectedItems],
+        ...sumProducts(newSelectedItems),
+        checkout: false,
+      }
+
+    case "INCREASE":
+      const increaseIndex = state.selectedItems.findIndex(
+        (item) => item.id === action.payload.id
+      )
+      state.selectedItems[increaseIndex].quantity++
+      return {
+        ...state,
+        ...sumProducts(state.selectedItems),
+      }
+
+    case "DECREASE":
+      const decreaseIndex = state.selectedItems.findIndex(
+        (item) => item.id === action.payload.id
+      )
+      state.selectedItems[decreaseIndex].quantity--
+      return {
+        ...state,
+        ...sumProducts(state.SelectedItems),
+      }
+
+    case "CHECKOUT":
+      return {
+        selectedItems: [],
+        itemsCouter: 0,
+        totalPrice: 0,
+        checkout: true,
       }
 
     default:
