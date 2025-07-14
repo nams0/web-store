@@ -47,7 +47,7 @@ const reducer = (state, action) => {
       state.selectedItems[decreaseIndex].quantity--
       return {
         ...state,
-        ...sumProducts(state.SelectedItems),
+        ...sumProducts(state.selectedItems),
       }
 
     case "CHECKOUT":
