@@ -28,4 +28,11 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
+
+.search button:hover {
+  background-color: #e2e2e2;
+  color: #fe5d42;
+}
+

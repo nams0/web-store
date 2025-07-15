@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { TbListDetails } from "react-icons/tb"
 import { TbShoppingBagCheck } from "react-icons/tb"
 import { MdDeleteOutline } from "react-icons/md"
+import { FiMinus } from "react-icons/fi"
+import { FiPlus } from "react-icons/fi"
 
 import { productQuantity, shortenText } from "../helpers/helper"
 import { useCart } from "../context/CartProvider"
@@ -38,7 +40,9 @@ function Card({ data }) {
           )}
 
           {quantity >= 2 && (
-            <button onClick={() => clickHandler("DECREASE")}>-</button>
+            <button onClick={() => clickHandler("DECREASE")}>
+              <FiMinus />
+            </button>
           )}
 
           <span>{!!quantity && quantity}</span>
@@ -48,7 +52,9 @@ function Card({ data }) {
               <TbShoppingBagCheck />
             </button>
           ) : (
-            <button onClick={() => clickHandler("INCREASE")}>+</button>
+            <button onClick={() => clickHandler("INCREASE")}>
+              <FiPlus />
+            </button>
           )}
         </div>
       </div>
