@@ -29,5 +29,11 @@ const useProducts = () => {
   return products
 } //custom hook
 
+const useProductsDetails = (id) => {
+  const products = useContext(ProductContext)
+  const result = products.find((product) => product.id === id)
+  return result
+} //custom hook
+
 export default ProductProvider
-export { useProducts }
+export { useProducts, useProductsDetails }

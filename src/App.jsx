@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom"
+
 import PageNotFound from "./pages/PageNotFound"
 import Products from "./pages/Products"
 import ProductDetailsPage from "./pages/ProductDetailsPage"
