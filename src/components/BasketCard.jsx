@@ -3,7 +3,7 @@ import { FiMinus, FiPlus } from "react-icons/fi"
 
 import { shortenText } from "../helpers/helper"
 
-import styls from "./BasketCart.module.css"
+import styls from "./BasketCard.module.css"
 
 function BasketCard({ product, dispatch }) {
   const { title, image, quantity, description } = product
