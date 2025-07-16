@@ -18,34 +18,34 @@ This React-based SPA (Single Page Application) simulates a fully functional onli
 
 ### 🛍 Product Catalog
 
-* Browse products
-* Filter by category
-* Search by product name
-* View detailed product information
+- Browse products
+- Filter by category
+- Search by product name
+- View detailed product information
 
 ### 🛒 Shopping Cart
 
-* Add, remove, and update item quantities
-* Persistent cart using `localStorage`
-* Clear and accessible checkout flow
+- Add, remove, and update item quantities
+- Persistent cart using `localStorage`
+- Clear and accessible checkout flow
 
 ### 💡 User Interface
 
-* Fully responsive and mobile-friendly
-* Smooth navigation with React Router
-* Empty cart messaging and loading indicators
+- Fully responsive and mobile-friendly
+- Smooth navigation with React Router
+- Empty cart messaging and loading indicators
 
 ---
 
 ## 🧰 Tech Stack
 
-* ⚛️ **React** (Hooks-based architecture)
-* 🔁 **React Router** for client-side routing
-* 🌐 **Context API** for global state management
-* 🗄 **localStorage** for data persistence
-* 📡 **Axios** for API requests
-* 🎨 **CSS Modules** for modular styling
-* 🎧 **React Icons** for modern iconography
+- ⚛️ **React** (Hooks-based architecture)
+- 🔁 **React Router** for client-side routing
+- 🌐 **Context API** for global state management
+- 🗄 **localStorage** for data persistence
+- 📡 **Axios** for API requests
+- 🎨 **CSS Modules** for modular styling
+- 🎧 **React Icons** for modern iconography
 
 ---
 
@@ -71,10 +71,13 @@ Product data is fetched from the [Fake Store API](https://fakestoreapi.com). Con
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home Page](./screenshots/home-page.png)
+
+![Home Page](./screenshots/Home-Page.png)
 
 ### 🧾 Product Detail
-![Product Detail](./screenshots/product-detail.png)
+
+![Product Detail](./screenshots/Product-Detail.png)
 
 ### 🛒 Cart View
-![Cart View](./screenshots/cart-view.png)
+
+![Cart View](./screenshots/Cart-View.png)
