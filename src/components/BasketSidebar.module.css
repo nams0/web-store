@@ -32,4 +32,12 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid #fe5d42;
+}
+
+.sidebar button:hover {
+  background-color: #fff;
+  color: #fe5d42;
+  border: 2px solid #fe5d42;
 }
