@@ -1,13 +1,30 @@
-import { createContext, useContext, useReducer } from "react"
+import { createContext, useContext, useEffect, useReducer } from "react"
 
 import { sumProducts } from "../helpers/helper"
 
-const initialState = {
-  selectedItems: [],
-  itemsCouter: 0,
-  totalPrice: 0,
-  checkout: false,
+const loadInitialState = () => {
+  // handle errors during server-side rendering (SSR)
+  if (typeof window !== undefined) {
+    const savedState = localStorage.getItem("cart")
+    return savedState
+      ? JSON.parse(savedState)
+      : {
+          selectedItems: [],
+          itemsCouter: 0,
+          totalPrice: 0,
+          checkout: false,
+        }
+  }
+
+  return {
+    selectedItems: [],
+    itemsCouter: 0,
+    totalPrice: 0,
+    checkout: false,
+  }
 }
+
+const initialState = loadInitialState()
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -67,6 +84,11 @@ const CartContext = createContext()
 
 function CartProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState)
+
+  useEffect(() => {
+    if (typeof window !== undefined)
+      localStorage.setItem("cart", JSON.stringify(state))
+  }, [state])
 
   return (
     <CartContext.Provider value={{ state, dispatch }}>
